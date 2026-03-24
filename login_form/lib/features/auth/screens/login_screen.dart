@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../widgets/auth_gradient_button.dart';
 import '../widgets/auth_text_field.dart';
@@ -76,18 +77,30 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 20),
 
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const SignupScreen(),
+                RichText(
+                  text: TextSpan(
+                    style: const TextStyle(color: AppPallete.greyColor),
+                    children: [
+                      const TextSpan(text: "Don't have an account? "),
+
+                      TextSpan(
+                        text: "Sign Up",
+                        style: const TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                        ..onTap=() {
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(
+                              builder: (_)=> const SignupScreen(),
+                              ),
+                          );
+                        },
+                        mouseCursor: SystemMouseCursors.click,
                       ),
-                    );
-                  },
-                  child: const Text(
-                    "Don't have an account? Sign Up",
-                    style: TextStyle(color: AppPallete.greyColor),
+                    ],
                   ),
                 ),
               ],

@@ -3,6 +3,7 @@ import 'package:login_form/features/auth/screens/login_screen.dart';
 import '../widgets/auth_gradient_button.dart';
 import '../widgets/auth_text_field.dart';
 import '../../../core/theme/app_palette.dart';
+import 'package:flutter/gestures.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -80,16 +81,30 @@ class _SignupScreenState extends State<SignupScreen> {
 
                 const SizedBox(height: 20),
 
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const LoginScreen()),
-                    );
-                  },
-                  child: const Text(
-                    "Already have an account? Login",
-                    style: TextStyle(color: AppPallete.greyColor),
+                RichText(
+                  text: TextSpan(
+                    style: const TextStyle(color: AppPallete.greyColor),
+                    children: [
+                      const TextSpan(text: "Already have an account? "),
+
+                      TextSpan(
+                        text: "Login",
+                        style: const TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const LoginScreen(),
+                              ),
+                            );
+                          },
+                        mouseCursor: SystemMouseCursors.click, // 👈 ONLY HERE
+                      ),
+                    ],
                   ),
                 ),
               ],
